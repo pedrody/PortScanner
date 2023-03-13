@@ -8,7 +8,7 @@ The script uses Python's socket library to create TCP connections on the specifi
 - To use the script, follow the steps below:
 1. Clone this repository to your local machine.
 2. Open the terminal or command prompt and navigate to the directory where the repository was cloned.
-3. Run the script by typing python port_scanner.py.
+3. Run the script by typing python port_scan.py.
 4. Enter the IP address you want to check.
 5. Select one of the port scanning options:
 Use a predefined list of ports.
