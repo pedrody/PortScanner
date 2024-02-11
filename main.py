@@ -19,7 +19,8 @@ def main():
         description='Scan open ports on a given address.'
     )
     parser.add_argument(
-        'address',
+        'addresses',
+        nargs='+',
         type=str,
         help='The IP address to scan.'
     )
@@ -48,29 +49,29 @@ def main():
 
     if not args.ports:
         args.ports = [21, 22, 25, 80, 443, 445, 3306]
-    
-    open_ports = get_open_ports(args.address, args.ports, args.timeout)
 
-    output = []
-    info_msg = (
-        f'\nScan Report - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n'
-        f'Target: {args.address}\n'
-    )
-    output.append(info_msg)
-    print(info_msg)
+    for address in args.addresses:
+        output = []
+        open_ports = get_open_ports(address, args.ports, args.timeout)
+        info_msg = (
+            f'\nScan Report - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n'
+            f'Target: {address}\n'
+        )
+        output.append(info_msg)
+        print(info_msg)
 
-    for port in args.ports:
-        status = 'OPEN' if port in open_ports else 'CLOSED'
-        output.append(f'{port} {status}')
-        print(f'{port} {status}') 
+        for port in args.ports:
+            status = 'OPEN' if port in open_ports else 'CLOSED'
+            output.append(f'{port} {status}')
+            print(f'{port} {status}') 
 
-    if args.save_file:
-        output_file = f'{args.save_file}.txt'
-        with open(output_file, 'a') as file:
-            for line in output:
-                file.write(f'{line}\n')
-    
-        print(f'\nOutput saved to "{output_file}"\n')
+        if args.save_file:
+            output_file = f'{args.save_file}.txt'
+            with open(output_file, 'a') as file:
+                for line in output:
+                    file.write(f'{line}\n')
+        
+            print(f'\nOutput saved to "{output_file}"\n')
 
 if __name__ == '__main__':
     main()
