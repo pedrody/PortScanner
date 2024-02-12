@@ -13,16 +13,22 @@ def get_open_ports(address, ports, timeout):
         client.close()
     return open_ports
 
-
 def main():
     parser = argparse.ArgumentParser(
         description='Scan open ports on a given address.'
     )
     parser.add_argument(
         'addresses',
-        nargs='+',
+        nargs='*',
         type=str,
-        help='The IP address to scan.'
+        default=[],
+        help='The IP address(es) to scan.'
+    )
+
+    parser.add_argument(
+        '-aF', '--addresses-file',
+        type=str,
+        help='Path to file with addresses to scan, separeted by commas or spaces.'
     )
 
     parser.add_argument(
@@ -49,7 +55,14 @@ def main():
 
     if not args.ports:
         args.ports = [21, 22, 25, 80, 443, 445, 3306]
-
+    
+    if args.addresses_file:
+        with open(args.addresses_file, 'r') as file:
+            args.addresses = [
+                address.strip() for line in file \
+                for address in line.strip().split(',')
+            ]
+    
     for address in args.addresses:
         output = []
         open_ports = get_open_ports(address, args.ports, args.timeout)
