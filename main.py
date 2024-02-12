@@ -2,6 +2,12 @@ import socket
 import argparse
 from datetime import datetime
 
+# ANSI colors
+RESET_CLR = '\033[0m'
+BOLD = '\033[1m'
+RED_CLR = '\033[91m'
+GREEN_CLR = '\033[92m'
+
 def get_open_ports(address, ports, timeout):
     open_ports = []
     for port in ports:
@@ -71,12 +77,13 @@ def main():
             f'Target: {address}\n'
         )
         output.append(info_msg)
-        print(info_msg)
+        print(f'{BOLD}{info_msg}{RESET_CLR}')
 
         for port in args.ports:
             status = 'OPEN' if port in open_ports else 'CLOSED'
+            status_clr = GREEN_CLR if port in open_ports else RED_CLR
             output.append(f'{port} {status}')
-            print(f'{port} {status}') 
+            print(f'{status_clr}{port} {status}{RESET_CLR}') 
 
         if args.save_file:
             output_file = f'{args.save_file}.txt'
