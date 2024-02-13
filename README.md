@@ -1,33 +1,56 @@
-# PortScanner
-This is a simple Python script that checks whether the ports on an IP address are open or closed.
+# Port Scanner
 
-## How it works
-The script uses Python's socket library to create TCP connections on the specified ports and check whether they are open or closed. The script accepts two port scanning options: a predefined list of ports and a custom list of ports provided by the user.
+## 📖 Description
+This project is a Python script for scanning open ports on specified IP addresses. It allows you to scan for open ports on individual addresses or multiple addresses provided in a file. The script utilizes the socket module to establish connections to target devices or servers and determine the status of specified ports.
 
-## How to use
-- To use the script, follow the steps below:
-1. Clone this repository to your local machine.
-2. Open the terminal or command prompt and navigate to the directory where the repository was cloned.
-3. Run the script by typing python port_scan.py.
-4. Enter the IP address you want to check.
-5. Select one of the port scanning options:
-Use a predefined list of ports.
-Manually add the ports you want to check.  
+The script establishes TCP connections to the specified IP addresses and ports. It checks whether the connections are successful to determine if the ports are open or closed. Results are displayed in the terminal and optionally saved to a text file.
 
-- If you chose the predefined port list option, the script will check whether the ports listed below are open or closed:  
-21 (FTP)  
-22 (SSH)  
-80 (HTTP)  
-443 (HTTPS)  
-445 (SMB)  
-3306 (MySQL)  
-25 (SMTP)  
+## 🛠️ Features
+- Scan Individual Addresses: Allows scanning of open ports on specific IP addresses.
+- Batch Scan: Supports scanning multiple IP addresses listed in a file.
+- Custom Port Specification: Users can specify the ports to be scanned.
+- Timeout Configuration: Allows configuring the timeout for port connection attempts.
+- Save Results Option: Provides the option to save scan results to a text file.
 
-- If you chose the option to manually add ports, enter the number of ports you want to check and type in the port numbers **separated by a space**.
-The script will display a list of open ports and a list of closed ports on the provided IP address.
+## 📡 Technologies Used
+![Python](https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white&style=for-the-badge)
 
-## Requirements
-To run the script, you will need Python 3 installed on your machine. Additionally, the script uses only standard Python libraries, so there is no need to install any additional libraries.
+## 💻 Usage
+First, ensure you have Python and Git installed on your system.
 
-## Disclaimer
-This script is for educational purposes only and should not be used to perform port scans on computers or networks without permission. Improper use of the script may result in security breaches and may be illegal in your jurisdiction.
+You can clone this repository to your local machine using Git:
+```
+git clone https://github.com/pedrody/PortScanner.git
+```
+Navigate to the cloned repository:
+```
+cd PortScanner
+```
+Now you're ready to use the script!
+
+You can execute it from your terminal, providing the following arguments:
+```
+python main.py [addresses] [-p PORTS] [-t TIMEOUT] [-sF SAVE_FILE]
+```
+
+### Command-line arguments
+- `[addresses]`: Specify the IP addresses to scan.
+- `-aF, --addresses-file`: Specify a file with addresses to scan, separated by commas or spaces.
+- `-p, --ports`: Specify the ports to scan (default ports: 21, 22, 25, 80, 443, 445, 3306).
+- `-t, --timeout`: Set the timeout for port connection attempts (default: 0.5 seconds).
+- `-sF, --save-file`: Specify where you want to save the scan results.
+
+### Example Usage
+Scan individuals addresses:
+```
+python main.py 192.168.0.1 192.168.0.33 www.google.com -p 80 443 -t 2
+```
+
+Scan addresses from a file:
+```
+python main.py -aF addresses.txt -p 22 80 443 -sF scan_results
+```
+
+## 🤝 Contributing
+Contributions are welcome! If you have any ideas, suggestions, or improvements, feel free to open an issue or create a pull request.
+
