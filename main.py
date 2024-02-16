@@ -8,11 +8,12 @@ BOLD = '\033[1m'
 RED_CLR = '\033[91m'
 GREEN_CLR = '\033[92m'
 
+
 def get_open_ports(address, ports, timeout):
     """
     The function `get_open_ports` takes an address, a list of ports, and a timeout
     value as input, and returns a list of open ports on that address.
-    
+
     :param address: The address parameter is the IP address or hostname of the
     target device or server that you want to scan for open ports
     :param ports: The "ports" parameter is a list of port numbers that you want to
@@ -31,6 +32,7 @@ def get_open_ports(address, ports, timeout):
             open_ports.append(port)
         client.close()
     return open_ports
+
 
 def main():
     # Setting up the parser to process command-line arguments
@@ -83,16 +85,16 @@ def main():
     # If the user does not specify ports, standard common ports will be used
     if not args.ports:
         args.ports = [21, 22, 25, 80, 443, 445, 3306]
-    
+
     # If the user specifies an addresses file, read addresses from the file and
     # save in "args.addresses"
     if args.addresses_file:
         with open(args.addresses_file, 'r') as file:
             args.addresses = [
-                address.strip() for line in file \
+                address.strip() for line in file
                 for address in line.strip().split(',')
             ]
-    
+
     # For each specified address, perform port scanning
     for address in args.addresses:
         output = []
@@ -112,7 +114,7 @@ def main():
             status_clr = GREEN_CLR if port in open_ports else RED_CLR
             output.append(f'{port} {status}')
             # Printing the port status to the terminal
-            print(f'{status_clr}{port} {status}{RESET_CLR}') 
+            print(f'{status_clr}{port} {status}{RESET_CLR}')
 
         # If specified, save the results to a file
         if args.save_file:
@@ -122,6 +124,7 @@ def main():
                     file.write(f'{line}\n')
             # Printing a message informing that the results have been saved
             print(f'\nOutput saved to "{output_file}"\n')
+
 
 if __name__ == '__main__':
     main()
