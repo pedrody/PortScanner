@@ -6,7 +6,7 @@ This project is a Python script for scanning open ports on specified IP addresse
 The script establishes TCP connections to the specified IP addresses and ports. It checks whether the connections are successful to determine if the ports are open or closed. Results are displayed in the terminal and optionally saved to a text file.
 
 ## 🛠️ Features
-- Scan Individual Addresses: Allows scanning of open ports on specific IP addresses.
+- Scan Addresses: Allows scanning of open ports on IP addresses.
 - Batch Scan: Supports scanning multiple IP addresses listed in a file.
 - Custom Port Specification: Users can specify the ports to be scanned.
 - Timeout Configuration: Allows configuring the timeout for port connection attempts.
@@ -34,7 +34,7 @@ python main.py [addresses] [-p PORTS] [-t TIMEOUT] [-sF SAVE_FILE]
 ```
 
 ### Command-line arguments
-- `[addresses]`: Specify the IP addresses to scan.
+- `[addresses]`: Specify IP addresses (separated by spaces) to scan.
 - `-aF, --addresses-file`: Specify a file with addresses to scan, separated by commas or spaces.
 - `-p, --ports`: Specify the ports to scan (default ports: 21, 22, 25, 80, 443, 445, 3306).
 - `-t, --timeout`: Set the timeout for port connection attempts (default: 0.5 seconds).
