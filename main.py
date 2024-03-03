@@ -11,15 +11,16 @@ GREEN_CLR = '\033[92m'
 
 def get_open_ports(address, ports, timeout):
     """
-    The function `get_open_ports` takes an address, a list of ports, and a timeout
-    value as input, and returns a list of open ports on that address.
+    The function `get_open_ports` takes an address, a list of ports, and a
+    timeout value as input, and returns a list of open ports on that address.
 
     :param address: The address parameter is the IP address or hostname of the
     target device or server that you want to scan for open ports
-    :param ports: The "ports" parameter is a list of port numbers that you want to
-    check for open ports on the specified address
-    :param timeout: The timeout parameter is the maximum amount of time (in seconds)
-    that the socket will wait for a connection attempt to succeed before timing out
+    :param ports: The "ports" parameter is a list of port numbers that you want
+    to check for open ports on the specified address
+    :param timeout: The timeout parameter is the maximum amount of time
+    (in seconds) that the socket will wait for a connection attempt to succeed
+    before timing out
     :return: a list of open ports.
     """
 
@@ -53,7 +54,8 @@ def main():
     parser.add_argument(
         '-aF', '--addresses-file',
         type=str,
-        help='Path to file with addresses to scan, separeted by commas or spaces.'
+        help='Path to file with addresses to scan, separeted by commas or \
+            spaces.'
     )
 
     # Argument to specify the ports to be scanned
@@ -101,7 +103,7 @@ def main():
         open_ports = get_open_ports(address, args.ports, args.timeout)
         # Creating an information message about scanning
         info_msg = (
-            f'\nScan Report - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n'
+            f'\nScan Report - {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n'
             f'Target: {address}\n'
         )
         output.append(info_msg)
